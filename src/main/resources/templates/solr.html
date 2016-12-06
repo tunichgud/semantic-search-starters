@@ -1,0 +1,22 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Getting Started: Serving Web Content</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+
+    <script language="javascript" type="text/javascript" th:src="@{/visualsearch/dependencies.js}"></script>
+    <script language="javascript" type="text/javascript" th:src="@{/visualsearch/visualsearch.js}"></script>
+    <script language="javascript" type="text/javascript" th:src="@{/searchbox.js}"></script>
+    <script language="javascript" type="text/javascript" th:src="@{/jquery-ui/jquery-ui.min.js}"></script>
+    <link href="visualsearch/visualsearch-datauri.css" media="screen" rel="stylesheet" type="text/css"/>
+    <link href="jquery-ui/jquery-ui.min.css" media="screen" rel="stylesheet" type="text/css"/>
+    <link href="visualsearch/visualsearch.css" media="screen" rel="stylesheet" type="text/css"/>
+</head>
+<body>
+
+<!--/*@thymesVar id="searchResults" type="java.lang.String"*/-->
+<h3 th:text="${searchResults}">
+</h3>
+
+</body>
+</html>
