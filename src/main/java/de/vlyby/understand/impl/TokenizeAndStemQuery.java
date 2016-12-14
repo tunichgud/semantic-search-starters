@@ -2,7 +2,7 @@ package de.vlyby.understand.impl;
 
 import de.vlyby.core.QueryFragment;
 import de.vlyby.core.UserQuery;
-import de.vlyby.understand.AnnotateQueryFragmentsInterface;
+import de.vlyby.understand.QueryUnderstandingInterface;
 import de.vlyby.utils.LuceneUtil;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.springframework.stereotype.Controller;
@@ -11,13 +11,13 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Controller
-public class TokenizeAndStemQuery implements AnnotateQueryFragmentsInterface {
+public class TokenizeAndStemQuery implements QueryUnderstandingInterface {
 
     public TokenizeAndStemQuery() {
     }
 
     @Override
-    public void process(UserQuery userQuery) {
+    public void helpUn  derstand(UserQuery userQuery) {
 
         StandardAnalyzer analyzer = new StandardAnalyzer();
 

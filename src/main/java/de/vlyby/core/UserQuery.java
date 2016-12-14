@@ -1,6 +1,6 @@
 package de.vlyby.core;
 
-import de.vlyby.understand.impl.QueryFragmentsAnnotate;
+import de.vlyby.understand.impl.AnnotateTokens;
 
 import java.util.List;
 
@@ -8,7 +8,7 @@ public class UserQuery {
 
     String originalQuery;
     List<QueryFragment> queryFragments;
-    List<QueryFragmentsAnnotate> queryAnnotations;
+    List<AnnotateTokens> queryAnnotations;
 
     public UserQuery(String originalQuery) {
         this.originalQuery = originalQuery;
@@ -30,11 +30,11 @@ public class UserQuery {
         this.originalQuery = originalQuery;
     }
 
-    public List<QueryFragmentsAnnotate> getQueryAnnotations() {
+    public List<AnnotateTokens> getQueryAnnotations() {
         return queryAnnotations;
     }
 
-    public void setQueryAnnotations(List<QueryFragmentsAnnotate> queryAnnotations) {
+    public void setQueryAnnotations(List<AnnotateTokens> queryAnnotations) {
         this.queryAnnotations = queryAnnotations;
     }
 

@@ -1,7 +1,7 @@
 package de.vlyby.understand;
 
 import de.vlyby.core.UserQuery;
-import de.vlyby.understand.impl.QueryFragmentsAnnotate;
+import de.vlyby.understand.impl.AnnotateTokens;
 import de.vlyby.understand.impl.TokenizeAndStemQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -10,13 +10,13 @@ import org.springframework.stereotype.Controller;
 public class OnRequest {
 
     @Autowired
-    QueryFragmentsAnnotate queryAnnotator ;
+    AnnotateTokens queryAnnotator ;
 
     @Autowired
-    TokenizeAndStemQuery annotateQueryFragments;
+    TokenizeAndStemQuery tokenizeAndStemQuery;
 
     public void process(UserQuery userQuery){
-        annotateQueryFragments.process(userQuery);
-        queryAnnotator.process(userQuery);
+        tokenizeAndStemQuery.helpUnderstand(userQuery);
+        queryAnnotator.helpUnderstand(userQuery);
     }
 }
