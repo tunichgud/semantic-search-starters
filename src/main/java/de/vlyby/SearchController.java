@@ -33,4 +33,12 @@ public class SearchController {
     }
 
 
+    @RequestMapping(method = RequestMethod.POST, value = "/duplicateReduce")
+    public UserQuery onDuplicateReduce(@RequestParam(value = "phrase", required = true) String phrase, Model model) throws IOException, SolrServerException {
+        UserQuery userQuery = new UserQuery(phrase);
+        onRequest.process(userQuery);
+        return userQuery;
+    }
+
+
 }

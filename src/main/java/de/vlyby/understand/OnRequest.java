@@ -6,6 +6,8 @@ import de.vlyby.understand.impl.TokenizeAndStemQuery;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import java.util.Optional;
+
 @Controller
 public class OnRequest {
 

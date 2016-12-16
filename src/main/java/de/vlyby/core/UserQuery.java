@@ -7,18 +7,18 @@ import java.util.List;
 public class UserQuery {
 
     String originalQuery;
-    List<QueryFragment> queryFragments;
+    QueryFragments queryFragments;
     List<AnnotateTokens> queryAnnotations;
 
     public UserQuery(String originalQuery) {
         this.originalQuery = originalQuery;
     }
 
-    public List<QueryFragment> getQueryFragments() {
+    public QueryFragments getQueryFragments() {
         return queryFragments;
     }
 
-    public void setQueryFragments(List<QueryFragment> queryFragments) {
+    public void setQueryFragments(QueryFragments queryFragments) {
         this.queryFragments = queryFragments;
     }
 

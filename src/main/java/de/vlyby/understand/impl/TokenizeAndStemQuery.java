@@ -1,9 +1,11 @@
 package de.vlyby.understand.impl;
 
 import de.vlyby.core.QueryFragment;
+import de.vlyby.core.QueryFragments;
 import de.vlyby.core.UserQuery;
 import de.vlyby.understand.QueryUnderstandingInterface;
 import de.vlyby.utils.LuceneUtil;
+import org.apache.lucene.analysis.de.GermanAnalyzer;
 import org.apache.lucene.analysis.standard.StandardAnalyzer;
 import org.springframework.stereotype.Controller;
 
@@ -17,9 +19,9 @@ public class TokenizeAndStemQuery implements QueryUnderstandingInterface {
     }
 
     @Override
-    public void helpUn  derstand(UserQuery userQuery) {
+    public void helpUnderstand(UserQuery userQuery) {
 
-        StandardAnalyzer analyzer = new StandardAnalyzer();
+        GermanAnalyzer analyzer = new GermanAnalyzer();
 
         List<QueryFragment> fragments = LuceneUtil.tokenizeString(analyzer, userQuery.getOriginalQuery()).stream()
                 .map(t -> {
@@ -28,6 +30,6 @@ public class TokenizeAndStemQuery implements QueryUnderstandingInterface {
                     return builder.build();
                 }
         ).collect(Collectors.toList());
-        userQuery.setQueryFragments(fragments);
+        userQuery.setQueryFragments(new QueryFragments(fragments));
     }
 }

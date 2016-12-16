@@ -2,8 +2,11 @@ package de.vlyby.core;
 
 import org.tartarus.snowball.ext.German2Stemmer;
 
+import java.util.Optional;
+
 public class QueryFragment {
 
+    public static final String DEFAULT_FRAGMENT = "";
     String fragment;
     String stemmed;
 
@@ -24,14 +27,13 @@ public class QueryFragment {
         String fragment;
 
         public QueryFragment build() {
-            if (this.fragment == null) {
-                throw new NullPointerException("fragment should not be null");
-            } else {
-                German2Stemmer stemmer = new German2Stemmer();
-                stemmer.setCurrent(this.getFragment());
-                stemmer.stem();
-                return new QueryFragment(this.fragment, stemmer.getCurrent());
-            }
+            Optional<String> fragment = Optional.ofNullable(this.fragment);
+            German2Stemmer stemmer = new German2Stemmer();
+            stemmer.setCurrent(fragment.orElse(DEFAULT_FRAGMENT));
+            stemmer.stem();
+            return new QueryFragment(this.fragment, stemmer.getCurrent());
+
+
         }
 
         public String getFragment() {
