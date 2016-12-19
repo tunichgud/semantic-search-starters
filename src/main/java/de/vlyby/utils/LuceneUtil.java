@@ -14,6 +14,7 @@ public final class LuceneUtil {
 
     private LuceneUtil() {}
 
+
     public static List<String> tokenizeString(Analyzer analyzer, String string) {
         List<String> result = new ArrayList<String>();
         try (TokenStream stream  = analyzer.tokenStream(null, new StringReader(string))){

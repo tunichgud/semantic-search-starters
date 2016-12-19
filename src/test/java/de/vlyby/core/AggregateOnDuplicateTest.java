@@ -29,7 +29,7 @@ public class AggregateOnDuplicateTest extends AbstractTestNGSpringContextTests {
 
         // when
         AggregateOnDuplicate aggregateOnDuplicate = new AggregateOnDuplicate();
-        List<AggregateOnDuplicate.OnlyTokens> result = aggregateOnDuplicate.apply(queries);
+        List<AggregateOnDuplicate.Tokens> result = aggregateOnDuplicate.apply(queries);
         // then
         assertEquals(result.size(), 1);
     }
@@ -45,7 +45,7 @@ public class AggregateOnDuplicateTest extends AbstractTestNGSpringContextTests {
 
         // when
         AggregateOnDuplicate aggregateOnDuplicate = new AggregateOnDuplicate();
-        List<AggregateOnDuplicate.OnlyTokens> result = aggregateOnDuplicate.apply(queries);
+        List<AggregateOnDuplicate.Tokens> result = aggregateOnDuplicate.apply(queries);
         // then
         assertEquals(result.size(), 1);
     }
@@ -61,7 +61,26 @@ public class AggregateOnDuplicateTest extends AbstractTestNGSpringContextTests {
 
         // when
         AggregateOnDuplicate aggregateOnDuplicate = new AggregateOnDuplicate();
-        List<AggregateOnDuplicate.OnlyTokens> result = aggregateOnDuplicate.apply(queries);
+        List<AggregateOnDuplicate.Tokens> result = aggregateOnDuplicate.apply(queries);
+        // then
+        assertEquals(result.size(), 2);
+    }
+
+    @Test
+    public void shouldAggregateIfNotCloseToOneAnother() {
+        // given
+        UserQuery u1 = new UserQuery("ein dummer bär");
+        onRequest.process(u1);
+        UserQuery u2 = new UserQuery("zwei dummer bar");
+        onRequest.process(u2);
+        UserQuery u3 = new UserQuery("ein dummer bären");
+        onRequest.process(u3);
+        UserQueries queries = new UserQueries(Arrays.asList(u1, u2, u3));
+
+        // when
+        AggregateOnDuplicate aggregateOnDuplicate = new AggregateOnDuplicate();
+        List<AggregateOnDuplicate.Tokens> result = aggregateOnDuplicate.apply(queries);
+
         // then
         assertEquals(result.size(), 2);
     }
