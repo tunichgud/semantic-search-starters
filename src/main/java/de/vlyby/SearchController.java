@@ -17,6 +17,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
+import static java.util.stream.Collectors.joining;
+
 @RestController
 public class SearchController {
 
@@ -38,11 +40,11 @@ public class SearchController {
 
 
     @RequestMapping(method = RequestMethod.POST, value = "/duplicateReduce")
-    public Map<Tokens, List<Tokens>> onDuplicateReduce(@RequestBody String phrase, Model model) throws IOException, SolrServerException {
+    public List<String> onDuplicateReduce(@RequestBody String phrase, Model model) throws IOException, SolrServerException {
         UserQueries queries = new UserQueries(Arrays.stream(phrase.split("\n")).map(s -> new UserQuery(s)).peek(q -> onRequest.process(q)).collect(Collectors.toList()));
         AggregateOnDuplicate aggregateOnDuplicate = new AggregateOnDuplicate();
         Map<Tokens, List<Tokens>> result = aggregateOnDuplicate.apply(queries);
-        return result;
+        return result.keySet().stream().map(v -> Tokens.asTokenString(v)).collect(Collectors.toList());
     }
 
 

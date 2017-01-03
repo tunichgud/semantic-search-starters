@@ -23,9 +23,13 @@ public class Tokens {
     }
 
     public static int compareAlphanumerical(Tokens one, Tokens another) {
-        String simpleOne = one.getTokens().stream().map(t -> t.getToken()).collect(Collectors.joining(" "));
-        String simpleAnother = another.getTokens().stream().map(t -> t.getToken()).collect(Collectors.joining(" "));
+        String simpleOne = asTokenString(one);
+        String simpleAnother = asTokenString(another);
         return simpleOne.compareTo(simpleAnother);
+    }
+
+    public static String asTokenString(Tokens one) {
+        return one.getTokens().stream().map(t -> t.getToken()).collect(Collectors.joining(" "));
     }
 
     public QueryFragments getQueryFragments() {
