@@ -10,11 +10,11 @@ buildscript {
         jenaVersion = '3.1.0'
     }
     repositories {
-        mavenCentral()
+	    mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
-        classpath 'org.springframework:springloaded:1.2.0.RELEASE'
+	    classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+	    classpath 'org.springframework:springloaded:1.2.0.RELEASE'
     }
 }
 
@@ -28,8 +28,8 @@ apply plugin: 'war'
 
 
 jar {
-    baseName = 'semantic-search-starters'
-    version = '0.0.1-SNAPSHOT'
+	baseName = 'semantic-search-starters'
+		version = '0.0.1-SNAPSHOT'
 }
 
 sourceCompatibility = 1.8
@@ -37,40 +37,39 @@ targetCompatibility = 1.8
 
 
 repositories {
-    mavenCentral()
+	mavenCentral()
 }
 
 dependencies {
-    testCompile group: 'junit', name: 'junit', version: '4.11'
-}
+	compile files("ext-lib/auto-phrase-tokenfilter-1.0.jar")
+	compile('org.springframework.boot:spring-boot-starter-data-solr')
+	compile('org.springframework.boot:spring-boot-starter-thymeleaf')
+	compile('org.springframework.boot:spring-boot-starter-web')
+	compile("org.springframework.data:spring-data-solr")
+	compile("org.springframework.boot:spring-boot-starter-thymeleaf")
+	compile("org.springframework.boot:spring-boot-devtools")
+	compile("org.springframework:springloaded:1.2.6.RELEASE")
+	compile("org.apache.lucene:lucene-core:${luceneVersion}")
+	compile("org.apache.lucene:lucene-analyzers-common:${luceneVersion}")
+	compile("org.apache.lucene:lucene-queryparser:${luceneVersion}")
+	compile("org.apache.jena:apache-jena:${jenaVersion}")
+	testCompile 'org.testng:testng:6.9.4'
+	testCompile('org.springframework.boot:spring-boot-starter-test')
 
-dependencies {
-    compile('org.springframework.boot:spring-boot-starter-data-solr')
-    compile('org.springframework.boot:spring-boot-starter-thymeleaf')
-    compile('org.springframework.boot:spring-boot-starter-web')
-    compile("org.springframework.data:spring-data-solr")
-    compile("org.springframework.boot:spring-boot-starter-thymeleaf")
-    compile("org.springframework.boot:spring-boot-devtools")
-    compile("org.springframework:springloaded:1.2.6.RELEASE")
-    compile("org.apache.lucene:lucene-core:${luceneVersion}")
-    compile("org.apache.lucene:lucene-analyzers-common:${luceneVersion}")
-    compile("org.apache.lucene:lucene-queryparser:${luceneVersion}")
-    compile("org.apache.jena:apache-jena:${jenaVersion}")
-    testCompile('org.springframework.boot:spring-boot-starter-test')
 }
 
 bootRun {
-    addResources = true
+	addResources = true
 }
 
 idea {
-    module {
-        inheritOutputDirs = false
-        outputDir = file("build/classes/main/")
-    }
+	module {
+		inheritOutputDirs = false
+		outputDir = file("build/classes/main/")
+	}
 }
 
 configurations.all {
-    exclude group: "org.slf4j", module: "slf4j-log4j12"
-    exclude group: "log4j", module: "log4j"
+	exclude group: "org.slf4j", module: "slf4j-log4j12"
+	exclude group: "log4j", module: "log4j"
 }

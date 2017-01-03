@@ -15,7 +15,8 @@ public class Tokens {
     }
 
     public static Tokens fromQueryFragments(QueryFragments queryFragments) {
-        return new Tokens(queryFragments.asList().stream()
+        return new Tokens(
+                queryFragments.asList().stream()
                 .map(t -> new Token(t.getStemmed()))
                 .sorted(Token::compareAlphabetically)
                 .collect(Collectors.toList()), queryFragments);
@@ -49,4 +50,5 @@ public class Tokens {
     public int hashCode() {
         return getTokens() != null ? getTokens().hashCode() : 0;
     }
+
 }

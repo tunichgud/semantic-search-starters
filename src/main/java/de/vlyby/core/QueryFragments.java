@@ -4,6 +4,10 @@ import java.util.List;
 
 public class QueryFragments {
 
+    public List<QueryFragment> getQueryFragments() {
+        return queryFragments;
+    }
+
     List<QueryFragment> queryFragments;
 
     public QueryFragments(List<QueryFragment> queryFragments) {
@@ -14,4 +18,8 @@ public class QueryFragments {
         return queryFragments;
     }
 
+    @Override
+    public String toString() {
+        return queryFragments.toString();
+    }
 }

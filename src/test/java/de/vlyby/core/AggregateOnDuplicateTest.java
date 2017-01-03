@@ -110,7 +110,7 @@ public class AggregateOnDuplicateTest extends AbstractTestNGSpringContextTests {
         onRequest.process(u1);
         UserQuery u2 = new UserQuery("zwei dummer bar");
         onRequest.process(u2);
-        UserQuery u3 = new UserQuery("ein dummer bären");
+        UserQuery u3 = new UserQuery("Ein dummer bären");
         onRequest.process(u3);
         UserQueries queries = new UserQueries(Arrays.asList(u1, u2, u3));
 
@@ -121,5 +121,23 @@ public class AggregateOnDuplicateTest extends AbstractTestNGSpringContextTests {
         // then
         assertEquals(result.values().size(), 2);
     }
+
+    @Test
+    public void multipleWordTokensShouldNotBeAggregated() {
+        // given
+        UserQuery u1 = new UserQuery("Herr der Ringe");
+        onRequest.process(u1);
+        UserQuery u2 = new UserQuery("Ringe Herren");
+        onRequest.process(u2);
+        UserQueries queries = new UserQueries(Arrays.asList(u1, u2));
+
+        // when
+        AggregateOnDuplicate aggregateOnDuplicate = new AggregateOnDuplicate();
+        Map<Tokens, List<Tokens>> result = aggregateOnDuplicate.apply(queries);
+
+        // then
+        assertEquals(result.values().size(), 2);
+    }
+
 
 }

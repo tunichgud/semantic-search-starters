@@ -5,8 +5,7 @@ import de.vlyby.core.QueryFragments;
 import de.vlyby.core.UserQuery;
 import de.vlyby.understand.QueryUnderstandingInterface;
 import de.vlyby.utils.LuceneUtil;
-import org.apache.lucene.analysis.de.GermanAnalyzer;
-import org.apache.lucene.analysis.standard.StandardAnalyzer;
+import org.apache.lucene.analysis.de.CustomAnalyzer;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
@@ -21,15 +20,16 @@ public class TokenizeAndStemQuery implements QueryUnderstandingInterface {
     @Override
     public void helpUnderstand(UserQuery userQuery) {
 
-        GermanAnalyzer analyzer = new GermanAnalyzer();
+        CustomAnalyzer analyzer = new CustomAnalyzer();
 
         List<QueryFragment> fragments = LuceneUtil.tokenizeString(analyzer, userQuery.getOriginalQuery()).stream()
                 .map(t -> {
-                    QueryFragment.QueryFragmentBuilder builder = new QueryFragment.QueryFragmentBuilder();
-                    builder.setFragment(t);
-                    return builder.build();
-                }
-        ).collect(Collectors.toList());
+                            QueryFragment.QueryFragmentBuilder builder = new QueryFragment.QueryFragmentBuilder();
+                            builder.setFragment(t);
+                            return builder.build();
+                        }
+                ).collect(Collectors.toList());
         userQuery.setQueryFragments(new QueryFragments(fragments));
     }
 }
+
